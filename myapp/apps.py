@@ -33,7 +33,10 @@ class MyappConfig(AppConfig):
 
         # The code you want to run ONCE here
         print("run second time")
-        os.environ['CMDLINERUNNER_RUN_ONCE'] = 'False' 
+        os.environ['CMDLINERUNNER_RUN_ONCE'] = 'False'
+        run_once = os.environ.get('CMDLINERUNNER_RUN_ONCE') 
+        print('check run_once:')
+        print(run_once)
 
 
 # # solution 3 -- not work

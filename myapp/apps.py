@@ -24,6 +24,8 @@ class MyappConfig(AppConfig):
 
     def ready(self):
         run_once = os.environ.get('CMDLINERUNNER_RUN_ONCE') 
+        print('run_once:')
+        print(run_once)
         if run_once is 'False':
             print('not run first time')
             return

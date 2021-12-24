@@ -1,5 +1,5 @@
 
-## solution 1 --notwork
+# # solution 1 --notwork
 # from django.apps import AppConfig
 # class MyappConfig(AppConfig):
 #     default_auto_field = 'django.db.models.BigAutoField'
@@ -14,23 +14,24 @@
 #         print("Hello")
 
 
-# # solution 2 -- work on local but not on heroku
-# from django.apps import AppConfig
-# import os
+# solution 2 -- work on local but not on heroku
+from django.apps import AppConfig
+import os
 
 # class CommandLineRunner(AppConfig):
-#     name = 'myapp'
+class MyappConfig(AppConfig):
+    name = 'myapp'
 
-#     def ready(self):
-#         run_once = os.environ.get('CMDLINERUNNER_RUN_ONCE') 
-#         if run_once is 'False':
-#             print('not run first time')
-#             return
-#         os.environ['CMDLINERUNNER_RUN_ONCE'] = 'True' 
+    def ready(self):
+        run_once = os.environ.get('CMDLINERUNNER_RUN_ONCE') 
+        if run_once is 'False':
+            print('not run first time')
+            return
+        # os.environ['CMDLINERUNNER_RUN_ONCE'] = 'True' 
 
-#         # The code you want to run ONCE here
-#         print("run second time")
-#         os.environ['CMDLINERUNNER_RUN_ONCE'] = 'False' 
+        # The code you want to run ONCE here
+        print("run second time")
+        os.environ['CMDLINERUNNER_RUN_ONCE'] = 'False' 
 
 
 # # solution 3 -- not work
@@ -92,3 +93,14 @@
 #     @single_process
 #     def ready(self):
 #         print('hello')
+
+# from django.apps import AppConfig
+# class MyappConfig(AppConfig):
+#     name = 'myapp'
+
+#     def ready(self, *args, **kwargs):
+#         is_manage_py = any(arg.casefold().endswith("manage.py") for arg in sys.argv)
+#         is_runserver = any(arg.casefold() == "runserver" for arg in sys.argv)
+
+#         if (is_manage_py and is_runserver) or (not is_manage_py):
+#             print('run app')
